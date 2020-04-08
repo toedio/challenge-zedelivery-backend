@@ -103,4 +103,4 @@ Run command ```docker build . -t backendchallenge``` to build docker image and r
 
 If you want to run on a specific port, run ```docker run -p YOUR_PORT:8080 -t backendchallenge```
 
-Note: The production database credentials need to be changed in the application-prd.properties file
+Note: The production database credentials need to be changed in the application-prd.properties file. Otherwise, the application will not start
