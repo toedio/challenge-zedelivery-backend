@@ -45,7 +45,7 @@ public class PartnerServiceImpl implements PartnerService {
 
     @Override
     public PartnerDTO search(Double lat, Double lng) {
-        Point point = new Point(lat, lng);
+        Point point = new Point(lng, lat);
         GeoJsonPoint geoJsonPoint = new GeoJsonPoint(point);
 
         Criteria criteria = Criteria.where("address").near(geoJsonPoint).and("coverageArea").intersects(geoJsonPoint);

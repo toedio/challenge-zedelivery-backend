@@ -33,22 +33,22 @@ public class ParnetSearchByLatLngTest extends IntegrationTest{
     }
     @Test
     public void shouldFindPointInConverageArea() throws Exception {
-        Point pointA = new Point(-23.62617, -46.55169);
-        Point pointB = new Point(-23.62746, -46.55327);
-        Point pointC = new Point(-23.62812, -46.55063);
-        Point pointD = new Point(-23.62686, -46.54987);
-        Point pointE = new Point(-23.62617, -46.55169);
+        Point pointA = new Point(-46.55169, -23.62617);
+        Point pointB = new Point(-46.55327, -23.62746);
+        Point pointC = new Point(-46.55063, -23.62812);
+        Point pointD = new Point(-46.54987, -23.62686);
+        Point pointE = new Point(-46.55169, -23.62617);
 
-        Point pointA1 = new Point(-23.62691,-46.55149);
-        Point pointB1 = new Point(-23.62755,  -46.55104);
-        Point pointC1 = new Point(-23.6274,  -46.55079);
-        Point pointD1 = new Point(-23.62691,-46.55149);
+        Point pointA1 = new Point(-46.55149, -23.62691);
+        Point pointB1 = new Point(-46.55104, -23.62755);
+        Point pointC1 = new Point(-46.55079, -23.6274);
+        Point pointD1 = new Point(-46.55149, -23.62691);
 
         Partner partner = new Partner();
         partner.setDocument(FAKER.number().digits(15));
         partner.setOwnerName(FAKER.name().fullName());
         partner.setTradingName(FAKER.company().name());
-        partner.setAddress(new GeoJsonPoint(-23.62671, -46.55111));
+        partner.setAddress(new GeoJsonPoint(-46.55111, -23.62671));
         GeoJsonPolygon borderPoints = new GeoJsonPolygon(Arrays.asList(pointA, pointB, pointC, pointD, pointE));
         GeoJsonPolygon borderInPoints = new GeoJsonPolygon(Arrays.asList(pointA1, pointB1, pointC1, pointD1));
         partner.setCoverageArea(new GeoJsonMultiPolygon(Arrays.asList(borderPoints, borderInPoints)));
@@ -68,22 +68,22 @@ public class ParnetSearchByLatLngTest extends IntegrationTest{
 
     @Test
     public void shouldNotFindPointOutConverageArea() throws Exception{
-        Point pointA = new Point(-23.62617, -46.55169);
-        Point pointB = new Point(-23.62746, -46.55327);
-        Point pointC = new Point(-23.62812, -46.55063);
-        Point pointD = new Point(-23.62686, -46.54987);
-        Point pointE = new Point(-23.62617, -46.55169);
+        Point pointA = new Point(-46.55169, -23.62617);
+        Point pointB = new Point(-46.55327, -23.62746);
+        Point pointC = new Point(-46.55063, -23.62812);
+        Point pointD = new Point(-46.54987, -23.62686);
+        Point pointE = new Point(-46.55169, -23.62617);
 
-        Point pointA1 = new Point(-23.62691,-46.55149);
-        Point pointB1 = new Point(-23.62755,  -46.55104);
-        Point pointC1 = new Point(-23.6274,  -46.55079);
-        Point pointD1 = new Point(-23.62691,-46.55149);
+        Point pointA1 = new Point(-46.55149, -23.62691);
+        Point pointB1 = new Point(-46.55104, -23.62755);
+        Point pointC1 = new Point(-46.55079, -23.6274);
+        Point pointD1 = new Point(-46.55149, -23.62691);
 
         Partner partner = new Partner();
         partner.setDocument(FAKER.number().digits(15));
         partner.setOwnerName(FAKER.name().fullName());
         partner.setTradingName(FAKER.company().name());
-        partner.setAddress(new GeoJsonPoint(-23.62671, -46.55111));
+        partner.setAddress(new GeoJsonPoint(-46.55111, -23.62671 ));
         GeoJsonPolygon borderPoints = new GeoJsonPolygon(Arrays.asList(pointA, pointB, pointC, pointD, pointE));
         GeoJsonPolygon borderInPoints = new GeoJsonPolygon(Arrays.asList(pointA1, pointB1, pointC1, pointD1));
         partner.setCoverageArea(new GeoJsonMultiPolygon(Arrays.asList(borderPoints, borderInPoints)));
@@ -103,16 +103,16 @@ public class ParnetSearchByLatLngTest extends IntegrationTest{
 
     @Test
     public void shouldFindNearestBetweenTwoPartnerInConverageArea() throws Exception{
-        Point pointA = new Point(-23.62617, -46.55169);
-        Point pointB = new Point(-23.62746, -46.55327);
-        Point pointC = new Point(-23.62812, -46.55063);
-        Point pointD = new Point(-23.62686, -46.54987);
-        Point pointE = new Point(-23.62617, -46.55169);
+        Point pointA = new Point(-46.55169, -23.62617);
+        Point pointB = new Point(-46.55327, -23.62746);
+        Point pointC = new Point(-46.55063, -23.62812);
+        Point pointD = new Point(-46.54987, -23.62686);
+        Point pointE = new Point(-46.55169, -23.62617);
 
-        Point pointA1 = new Point(-23.62691,-46.55149);
-        Point pointB1 = new Point(-23.62755,  -46.55104);
-        Point pointC1 = new Point(-23.6274,  -46.55079);
-        Point pointD1 = new Point(-23.62691,-46.55149);
+        Point pointA1 = new Point(-46.55149, -23.62691);
+        Point pointB1 = new Point(-46.55104, -23.62755);
+        Point pointC1 = new Point(-46.55079, -23.6274);
+        Point pointD1 = new Point(-46.55149, -23.62691);
 
         GeoJsonPolygon borderPoints = new GeoJsonPolygon(Arrays.asList(pointA, pointB, pointC, pointD, pointE));
         GeoJsonPolygon borderInPoints = new GeoJsonPolygon(Arrays.asList(pointA1, pointB1, pointC1, pointD1));
@@ -121,7 +121,7 @@ public class ParnetSearchByLatLngTest extends IntegrationTest{
         partnerA.setDocument(FAKER.number().digits(15));
         partnerA.setOwnerName(FAKER.name().fullName());
         partnerA.setTradingName(FAKER.company().name());
-        partnerA.setAddress(new GeoJsonPoint(-24.62671, -47.55111));
+        partnerA.setAddress(new GeoJsonPoint(-47.55111, -24.62671));
         partnerA.setCoverageArea(new GeoJsonMultiPolygon(Arrays.asList(borderPoints, borderInPoints)));
         partnerRepository.save(partnerA);
 
@@ -129,7 +129,7 @@ public class ParnetSearchByLatLngTest extends IntegrationTest{
         partnerB.setDocument(FAKER.number().digits(15));
         partnerB.setOwnerName(FAKER.name().fullName());
         partnerB.setTradingName(FAKER.company().name());
-        partnerB.setAddress(new GeoJsonPoint(-23.62671, -46.55111));
+        partnerB.setAddress(new GeoJsonPoint(-46.55111, -23.62671));
         partnerB.setCoverageArea(new GeoJsonMultiPolygon(Arrays.asList(borderPoints, borderInPoints)));
         partnerRepository.save(partnerB);
 
