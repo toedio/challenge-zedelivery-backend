@@ -34,7 +34,7 @@ public class BackendChallengeApplication {
 
 	@Bean
 	@Profile({"!prd"})
-	public Jackson2RepositoryPopulatorFactoryBean loadInitial(ObjectMapper objectMapper) throws Exception {
+	public Jackson2RepositoryPopulatorFactoryBean loadInitial(ObjectMapper objectMapper) {
 		Jackson2RepositoryPopulatorFactoryBean factory = new Jackson2RepositoryPopulatorFactoryBean();
 		factory.setMapper(objectMapper);
 		factory.setResources(new Resource[]{initialData});

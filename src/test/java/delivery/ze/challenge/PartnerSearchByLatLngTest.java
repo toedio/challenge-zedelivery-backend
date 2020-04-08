@@ -20,7 +20,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-public class ParnetSearchByLatLngTest extends IntegrationTest{
+public class PartnerSearchByLatLngTest extends IntegrationTest{
 
     private MockMvc mockMvc;
 
@@ -32,7 +32,7 @@ public class ParnetSearchByLatLngTest extends IntegrationTest{
         this.mockMvc = MockMvcBuilders.webAppContextSetup(this.wac).build();
     }
     @Test
-    public void shouldFindPointInConverageArea() throws Exception {
+    public void shouldFindPointInCoverageArea() throws Exception {
         Point pointA = new Point(-46.55169, -23.62617);
         Point pointB = new Point(-46.55327, -23.62746);
         Point pointC = new Point(-46.55063, -23.62812);
@@ -67,7 +67,7 @@ public class ParnetSearchByLatLngTest extends IntegrationTest{
     }
 
     @Test
-    public void shouldNotFindPointOutConverageArea() throws Exception{
+    public void shouldNotFindPointOutCoverageArea() throws Exception{
         Point pointA = new Point(-46.55169, -23.62617);
         Point pointB = new Point(-46.55327, -23.62746);
         Point pointC = new Point(-46.55063, -23.62812);
@@ -102,7 +102,7 @@ public class ParnetSearchByLatLngTest extends IntegrationTest{
     }
 
     @Test
-    public void shouldFindNearestBetweenTwoPartnerInConverageArea() throws Exception{
+    public void shouldFindNearestBetweenTwoPartnerInCoverageArea() throws Exception{
         Point pointA = new Point(-46.55169, -23.62617);
         Point pointB = new Point(-46.55327, -23.62746);
         Point pointC = new Point(-46.55063, -23.62812);

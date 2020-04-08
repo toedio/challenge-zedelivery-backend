@@ -24,9 +24,9 @@ public class ErrorDTO {
         this.message = message;
     }
 
-    public ErrorDTO(String message, boolean conhecida) {
+    public ErrorDTO(String message, boolean known) {
         this.message = message;
-        this.known = conhecida;
+        this.known = known;
     }
 
 }

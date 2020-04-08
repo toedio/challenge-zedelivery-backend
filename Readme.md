@@ -81,7 +81,7 @@ Body example
 ### 2. Get partner by id
 GET http://localhost:8080/partners/2
 
-Note: When the application starts the partners are populated in the MongoDB collection. This not happen when run with "prd" profile
+Note: When the application starts the partners are populated in the MongoDB collection. This not happen when run with "prd" profile.
 
 ### 3. Search partner by location
 GET http://localhost:8080/partners/search?lat=-23.45558&lng=-45.7852
@@ -93,7 +93,7 @@ Note: This command execute the tests
 
 ## Run Locally
 
-The system uses MongoDB and to start it is necessary that the local server is running and the application will automatically connect using the url http://localhost:27017. If you don't have it installed, go to https://docs.mongodb.com/manual/tutorial/manage-mongodb-processes/
+The system uses MongoDB and to start it is necessary the local server is running, and application will automatically connect using the url http://localhost:27017. If you don't have it installed go to https://docs.mongodb.com/manual/tutorial/manage-mongodb-processes/
 
 When MongoDB local server is running, run command ```mvn spring-boot-run``` and the 
 API will be exposed at port 8080

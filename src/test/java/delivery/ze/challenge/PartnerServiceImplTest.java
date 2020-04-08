@@ -6,7 +6,6 @@ import delivery.ze.challenge.dto.PartnerDTO;
 import delivery.ze.challenge.exception.BadRequestException;
 import delivery.ze.challenge.exception.NotFoundException;
 import delivery.ze.challenge.service.impl.PartnerServiceImpl;
-import org.bson.Document;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.*;
@@ -20,10 +19,10 @@ import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.*;
 
@@ -91,7 +90,7 @@ public class PartnerServiceImplTest extends UnitTest{
         partnerDTO.setTradingName(FAKER.company().name());
         partnerDTO.setAddress(new GeoJsonPoint(getRandomLng(), getRandomLat()));
         GeoJsonPolygon points = new GeoJsonPolygon(Arrays.asList(new Point(getRandomLng(), getRandomLat()), new Point(getRandomLng(), getRandomLat())));
-        partnerDTO.setCoverageArea(new GeoJsonMultiPolygon(Arrays.asList(points)));
+        partnerDTO.setCoverageArea(new GeoJsonMultiPolygon(Collections.singletonList(points)));
 
         partnerService.create(partnerDTO);
 
@@ -121,7 +120,7 @@ public class PartnerServiceImplTest extends UnitTest{
         partnerDTO.setTradingName(FAKER.company().name());
         partnerDTO.setAddress(new GeoJsonPoint(getRandomLng(), getRandomLat()));
         GeoJsonPolygon points = new GeoJsonPolygon(Arrays.asList(new Point(getRandomLng(), getRandomLat()), new Point(getRandomLng(), getRandomLat())));
-        partnerDTO.setCoverageArea(new GeoJsonMultiPolygon(Arrays.asList(points)));
+        partnerDTO.setCoverageArea(new GeoJsonMultiPolygon(Collections.singletonList(points)));
 
         assertThrows(BadRequestException.class, () -> partnerService.create(partnerDTO));
 
@@ -137,8 +136,8 @@ public class PartnerServiceImplTest extends UnitTest{
         given(mongoTemplate.findOne(any(Query.class), eq(Partner.class)))
                 .willReturn(new Partner());
 
-        Double lat = Double.valueOf(getRandomLat());
-        Double lng = Double.valueOf(getRandomLng());
+        Double lat = getRandomLat();
+        Double lng = getRandomLng();
         GeoJsonPoint geoJsonPoint = new GeoJsonPoint(new Point(lng, lat));
 
         Criteria expectedCriteria = Criteria.where("address").near(geoJsonPoint).and("coverageArea").intersects(geoJsonPoint);
@@ -160,8 +159,8 @@ public class PartnerServiceImplTest extends UnitTest{
         given(mongoTemplate.findOne(any(Query.class), eq(Partner.class)))
                 .willReturn(null);
 
-        Double lat = Double.valueOf(getRandomLat());
-        Double lng = Double.valueOf(getRandomLng());
+        Double lat = getRandomLat();
+        Double lng = getRandomLng();
         GeoJsonPoint geoJsonPoint = new GeoJsonPoint(new Point(lng, lat));
 
         Criteria expectedCriteria = Criteria.where("address").near(geoJsonPoint).and("coverageArea").intersects(geoJsonPoint);
