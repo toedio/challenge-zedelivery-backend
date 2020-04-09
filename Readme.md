@@ -86,10 +86,8 @@ Note: When the application starts the partners are populated in the MongoDB coll
 ### 3. Search partner by location
 GET http://localhost:8080/partners/search?lat=-23.45558&lng=-45.7852
     
-## Build
-Run command ```mvn clean install```
-
-Note: This command execute the tests
+## Run Tests
+Run command ```mvn test```
 
 ## Run Locally
 

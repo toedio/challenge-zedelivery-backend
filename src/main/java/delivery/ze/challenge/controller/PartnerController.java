@@ -1,9 +1,10 @@
 package delivery.ze.challenge.controller;
 
+import delivery.ze.challenge.domain.Partner;
 import delivery.ze.challenge.dto.PartnerDTO;
 import delivery.ze.challenge.service.PartnerService;
-import delivery.ze.challenge.validator.groups.Create;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
+import org.springframework.core.convert.ConversionService;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,24 +17,32 @@ import javax.validation.constraints.NotNull;
 @RestController
 @RequestMapping("/partners")
 @Validated
+@RequiredArgsConstructor
 public class PartnerController {
 
-    @Autowired
-    private PartnerService partnerService;
+    private final ConversionService conversionService;
+
+    private final PartnerService partnerService;
 
     @GetMapping("/{id}")
     @Validated
-    public PartnerDTO findById(@PathVariable @NotBlank String id) { return partnerService.getById(id); }
-
-    @PostMapping
-    @Validated(Create.class)
-    public PartnerDTO create(@RequestBody @NotNull(groups = Create.class) @Valid PartnerDTO partnerDTO) {
-        return partnerService.create(partnerDTO);
+    public PartnerDTO findById(@PathVariable @NotBlank String id) {
+        Partner partner = partnerService.getById(id);
+        return conversionService.convert(partner, PartnerDTO.class);
     }
 
-    @GetMapping(value = "/search", params = {"lat", "lng"})
-    public PartnerDTO searchByLatLng(@RequestParam @NotNull @Min(-90) @Max(90) Double lat,
-                                     @RequestParam @NotNull @Min(-180) @Max(180) Double lng) {
-        return partnerService.search(lat, lng);
+    @PostMapping
+    @Validated
+    public PartnerDTO create(@RequestBody @NotNull @Valid PartnerDTO partnerDTO) {
+        final Partner partner = conversionService.convert(partnerDTO, Partner.class);
+        final Partner savedPartner = partnerService.create(partner);
+        return conversionService.convert(savedPartner, PartnerDTO.class);
+    }
+
+    @GetMapping(params = {"lat", "lng"})
+    public PartnerDTO searchByLatLng(@RequestParam @NotNull @Min(-180) @Max(180) Double lng,
+                                     @RequestParam @NotNull @Min(-90) @Max(90) Double lat) {
+        final Partner partner = partnerService.search(lng, lat);
+        return conversionService.convert(partner, PartnerDTO.class);
     }
 }

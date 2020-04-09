@@ -1,12 +1,12 @@
 package delivery.ze.challenge.service;
 
-import delivery.ze.challenge.dto.PartnerDTO;
+import delivery.ze.challenge.domain.Partner;
 
 public interface PartnerService {
 
-    PartnerDTO getById(String id);
+    Partner getById(String id);
 
-    PartnerDTO create(PartnerDTO partnerDTO);
+    Partner create(Partner partner);
 
-    PartnerDTO search(Double lat, Double lng);
+    Partner search(Double lng, Double lat);
 }

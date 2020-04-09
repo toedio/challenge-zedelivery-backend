@@ -32,6 +32,10 @@ public class BackendChallengeApplication {
 	@Autowired
 	private MongoTemplate mongoTemplate;
 
+	/*
+	TODO
+	    - Delete and do in docker
+	 */
 	@Bean
 	@Profile({"!prd"})
 	public Jackson2RepositoryPopulatorFactoryBean loadInitial(ObjectMapper objectMapper) {
@@ -40,6 +44,10 @@ public class BackendChallengeApplication {
 		factory.setResources(new Resource[]{initialData});
 		return factory;
 	}
+	/*
+	TODO
+		- Delete and do in docker
+	 */
 
 	@EventListener(ApplicationReadyEvent.class)
 	public void initIndicesAfterStartup() {
