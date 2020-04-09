@@ -9,16 +9,24 @@ Contact: toedio6@gmail.com / 11 99656-6750
 - Maven
 - MongoDB
 - Redis
+- Docker
 
 ## Technical Decisions
 ### MongoDB
 I used mongodb to save and get partners because it have GeoJSON support and we can easily query using "$near" and "$geoIntersects" operators. It too have caching that improves queries perform.
+
 ### Cache with Redis
 I implement caching in get partner by id service. this improve performance when has a big volume of requests. For now, application is only caching this service but can add services and can implements other features like time to live (ttl), cache evict on delete and cache put on update. Redis was database chosen to save cache because its very performatic for that and frequently used as cache database.
+
 ### Validations in controller
 PartnerController class has validations' annotation like @NotNull @Min, @Max, @Valid. I chose this way because is a better way validate in first application's layer avoiding processing invalid objetcs. PartnerDTO class has annotations too like @NotBlank, @CNPJ, @Null and this annotations is validates by @Valid annotation in PartnerController class.
+
 ### Converters
 Application has a converter service. It is used to convert DTO into an entity and vice versa and this service is used in controller. This way PartnerService know only domain and PartnerController know only DTO.
+
+### Docker Compose
+The application use docker compose that automatically starts all necessary dependencies (redis and mongodb) and starts the web application on port 8080. I chose the docker compose because it is an easy tool to run the docker with multiple containers, platforms with multiple clouds and standardize the infrastructure.
+
 ## Services
 API was documented using swagger.io and file swagger-doc.json is available on the project. The services are also described below.
 ### 1. Create partner
@@ -102,18 +110,7 @@ Example ```GET /partners?lat=-23.89415&lng=-46.858412```
 ## Run Tests
 Run command ```mvn test```
 
-## Run Locally
+## Run
+To run application was created a docker compose structure. When run command command below will start redis, mongodb and application. After mongodb will be populated and ensure necessary indexes
 
-The system uses MongoDB and to start it is necessary the local server is running, and application will automatically connect using the url http://localhost:27017. If you don't have it installed go to https://docs.mongodb.com/manual/tutorial/manage-mongodb-processes/
-
-When MongoDB local server is running, run command ```mvn spring-boot-run``` and the 
-API will be exposed at port 8080
-
-## Deploy
-Project has a dockerfile, you can deploy in all cloud platforms
-
-Run command ```docker build . -t backendchallenge``` to build docker image and run ```docker run -t backendchallenge``` to run
-
-If you want to run on a specific port, run ```docker run -p YOUR_PORT:8080 -t backendchallenge```
-
-Note: The production database credentials need to be changed in the application-prd.properties file. Otherwise, the application will not start
+Run command ```docker-compose up```

@@ -6,6 +6,5 @@ import org.springframework.data.mongodb.core.geo.GeoJsonPoint;
 import java.util.Optional;
 
 public interface PartnerRepositoryCustom {
-
     Optional<Partner> searchNearestAndInCoverageAreaByPoint(GeoJsonPoint point);
 }

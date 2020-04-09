@@ -10,7 +10,6 @@ public class PartnerDTOToPartnerConverter implements Converter<PartnerDTO, Partn
 
     @Override
     public Partner convert(PartnerDTO partnerDTO) {
-
         return new Partner(partnerDTO.getTradingName(), partnerDTO.getOwnerName(),
                 partnerDTO.getDocument(), partnerDTO.getCoverageArea(), partnerDTO.getAddress());
     }

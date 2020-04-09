@@ -6,7 +6,7 @@ import static org.springframework.http.HttpStatus.BAD_REQUEST;
 
 @ResponseStatus(BAD_REQUEST)
 public class BadRequestException extends BaseException {
-    private static final long serialVersionUID = 2382707238147763716L;
+    private static final long serialVersionUID = 4865615905718225792L;
 
     public BadRequestException(String message) {
         super(message);
