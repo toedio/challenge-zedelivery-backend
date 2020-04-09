@@ -8,19 +8,23 @@ Contact: toedio6@gmail.com / 11 99656-6750
 - Spring Boot 2.2.6
 - Maven
 - MongoDB
+- Redis
 
 ## Technical Decisions
 ### MongoDB
+I used mongodb to save and get partners because it have GeoJSON support and we can easily query using "$near" and "$geoIntersects" operators. It too have caching that improves queries perform.
 ### Cache with Redis
+I implement caching in get partner by id service. this improve performance when has a big volume of requests. For now, application is only caching this service but can add services and can implements other features like time to live (ttl), cache evict on delete and cache put on update. Redis was database chosen to save cache because its very performatic for that and frequently used as cache database.
 ### Validations in controller
+PartnerController class has validations' annotation like @NotNull @Min, @Max, @Valid. I chose this way because is a better way validate in first application's layer avoiding processing invalid objetcs. PartnerDTO class has annotations too like @NotBlank, @CNPJ, @Null and this annotations is validates by @Valid annotation in PartnerController class.
 ### Converters
-
+Application has a converter service. It is used to convert DTO into an entity and vice versa and this service is used in controller. This way PartnerService know only domain and PartnerController know only DTO.
 ## Services
 API was documented using swagger.io and file swagger-doc.json is available on the project. The services are also described below.
 ### 1. Create partner
 POST /partners
 
-JSON example
+Example (body)
 ```
 {
     "tradingName": "Teste Victor 2",
@@ -86,10 +90,14 @@ JSON example
 ```
 
 ### 2. Get partner by id
-GET /partners/2
+GET /partners/{id}
+
+Example ```GET /partners/1```
 
 ### 3. Search partner by location
-GET /partners?lat=-23.45558&lng=-45.7852
+GET /partners?lat={lat}&lng={lng}
+
+Example ```GET /partners?lat=-23.89415&lng=-46.858412```
     
 ## Run Tests
 Run command ```mvn test```
