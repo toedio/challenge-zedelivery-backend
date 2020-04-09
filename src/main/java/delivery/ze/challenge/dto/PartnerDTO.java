@@ -12,10 +12,13 @@ import org.springframework.data.mongodb.core.geo.GeoJsonPoint;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Null;
+import java.io.Serializable;
 
 @Getter
 @NoArgsConstructor
-public class PartnerDTO {
+public class PartnerDTO implements Serializable {
+
+    private static final long serialVersionUID = 1010225128202819155L;
 
     @Null
     private String id;

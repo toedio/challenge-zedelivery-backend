@@ -281,7 +281,7 @@ public class PartnerControllerTest extends IntegrationTest{
 
         ErrorDTO[] errorDTOS = objectMapper.readValue(contentAsString, ErrorDTO[].class);
 
-        Optional<ErrorDTO> optionalErrorDTO = Arrays.asList(errorDTOS).stream().findFirst();
+        Optional<ErrorDTO> optionalErrorDTO = Arrays.stream(errorDTOS).findFirst();
         assertTrue(optionalErrorDTO.isPresent());
 
         ErrorDTO errorDTO = optionalErrorDTO.get();

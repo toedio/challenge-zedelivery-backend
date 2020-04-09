@@ -4,6 +4,7 @@ import delivery.ze.challenge.domain.Partner;
 import delivery.ze.challenge.dto.PartnerDTO;
 import delivery.ze.challenge.service.PartnerService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.core.convert.ConversionService;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -26,6 +27,7 @@ public class PartnerController {
 
     @GetMapping("/{id}")
     @Validated
+    @Cacheable("partnerDTO")
     public PartnerDTO findById(@PathVariable @NotBlank String id) {
         Partner partner = partnerService.getById(id);
         return conversionService.convert(partner, PartnerDTO.class);
