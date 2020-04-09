@@ -1,0 +1,251 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "",
+    "version": "0.0.1",
+    "title": "Backend Challenge"
+  },
+  "host": "localhost:8080",
+  "basePath": "/",
+  "schemes": [
+    "http"
+  ],
+  "paths": {
+    "/partner/{partnerId}": {
+      "get": {
+        "tags": [
+          "partner"
+        ],
+        "summary": "Get a specific partner by its id.",
+        "description": "Returns a single partner",
+        "operationId": "getPetById",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "partnerId",
+            "in": "path",
+            "description": "ID of partner to return",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Partner"
+            }
+          },
+          "404": {
+            "description": "Partner not found"
+          }
+        }
+      }
+    },
+    "/partner": {
+      "get": {
+        "tags": [
+          "partner"
+        ],
+        "summary": "Search the nearest partner considering each partner's coverage area",
+        "description": "Given a specific location (coordinates lng and lat), search the nearest partner considering each partner's coverage area",
+        "operationId": "getByPoint",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "lat",
+            "in": "query",
+            "description": "latitude",
+            "required": true,
+            "type": "number",
+            "maximum": 90,
+            "minimum": -90
+          },
+          {
+            "name": "lng",
+            "in": "query",
+            "description": "longitude",
+            "required": true,
+            "type": "number",
+            "maximum": 180,
+            "minimum": -180
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Partner"
+            }
+          },
+          "404": {
+            "description": "Partner not found"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "partner"
+        ],
+        "summary": "Create a partner",
+        "operationId": "createPartner",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Partner to be created",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Partner"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Partner"
+            }
+          },
+          "400": {
+            "description": "Partner already exists with this cnpj"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Partner": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Partner's id",
+          "example": "1"
+        },
+        "tradingName": {
+          "type": "string",
+          "description": "Partner's trading name",
+          "example": "Adega da Cerveja - Pinheiros"
+        },
+        "ownerName": {
+          "type": "string",
+          "description": "Partner's owner name",
+          "example": "Zé da Silva"
+        },
+        "document": {
+          "type": "string",
+          "description": "Partner's document. Valid CNPJ.",
+          "example": "1432132123891/0001"
+        },
+        "coverageArea": {
+          "$ref": "#/definitions/MultiPolygon"
+        },
+        "address": {
+          "$ref": "#/definitions/Point"
+        }
+      }
+    },
+    "MultiPolygon": {
+      "type": "object",
+      "description": "GeoJSon geometry",
+      "externalDocs": {
+        "url": "http://geojson.org/geojson-spec.html#id6"
+      },
+      "properties": {
+        "coordinates": {
+          "type": "array",
+          "items": {
+            "type": "array",
+            "items": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Point"
+              }
+            }
+          }
+        },
+        "type": {
+          "type": "string",
+          "default": "MultiPolygon"
+        }
+      },
+      "example": {
+        "type": "MultiPolygon",
+        "coordinates": [
+          [
+            [
+              [
+                -23.62617,
+                -46.55169
+              ],
+              [
+                -23.62746,
+                -46.55327
+              ],
+              [
+                -23.62812,
+                -46.55063
+              ],
+              [
+                -23.62686,
+                -46.54987
+              ],
+              [
+                -23.62617,
+                -46.55169
+              ]
+            ]
+          ],
+          [
+            [
+              [
+                -23.62691,
+                -46.55149
+              ],
+              [
+                -23.62755,
+                -46.55104
+              ],
+              [
+                -23.6274,
+                -46.55079
+              ],
+              [
+                -23.62691,
+                -46.55149
+              ]
+            ]
+          ]
+        ]
+      }
+    },
+    "Point": {
+      "properties": {
+        "coordinates": {
+          "type": "array",
+          "maxItems": 2,
+          "minItems": 2
+        },
+        "type": {
+          "type": "string",
+          "default": "Point"
+        }
+      },
+      "example": {
+        "type": "Point",
+        "coordinates": [
+          -23.5697,
+          -46.8455
+        ]
+      }
+    }
+  }
+}

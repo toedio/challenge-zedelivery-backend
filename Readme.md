@@ -9,11 +9,18 @@ Contact: toedio6@gmail.com / 11 99656-6750
 - Maven
 - MongoDB
 
-## Services
-### 1. Create partner
-POST http://localhost:8080/partners
+## Technical Decisions
+### MongoDB
+### Cache with Redis
+### Validations in controller
+### Converters
 
-Body example
+## Services
+API was documented using swagger.io and file swagger-doc.json is available on the project. The services are also described below.
+### 1. Create partner
+POST /partners
+
+JSON example
 ```
 {
     "tradingName": "Teste Victor 2",
@@ -79,12 +86,10 @@ Body example
 ```
 
 ### 2. Get partner by id
-GET http://localhost:8080/partners/2
-
-Note: When the application starts the partners are populated in the MongoDB collection. This not happen when run with "prd" profile.
+GET /partners/2
 
 ### 3. Search partner by location
-GET http://localhost:8080/partners/search?lat=-23.45558&lng=-45.7852
+GET /partners?lat=-23.45558&lng=-45.7852
     
 ## Run Tests
 Run command ```mvn test```
