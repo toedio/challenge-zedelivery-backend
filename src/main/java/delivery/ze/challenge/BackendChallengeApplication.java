@@ -43,7 +43,7 @@ public class BackendChallengeApplication {
 	@Bean
 	@Primary
 	public RedisCacheConfiguration defaultCacheConfig(ObjectMapper objectMapper) {
-		Jackson2JsonRedisSerializer<PartnerDTO> serializer = new Jackson2JsonRedisSerializer<>(PartnerDTO.class);
+		Jackson2JsonRedisSerializer<Partner> serializer = new Jackson2JsonRedisSerializer<>(Partner.class);
 		serializer.setObjectMapper(objectMapper);
 		return RedisCacheConfiguration.defaultCacheConfig()
 				.serializeKeysWith(SerializationPair.fromSerializer(new StringRedisSerializer()))

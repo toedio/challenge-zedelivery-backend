@@ -1,5 +1,8 @@
 package delivery.ze.challenge.domain;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import delivery.ze.challenge.utils.GeoJsonMultiPolygonSerializer;
+import delivery.ze.challenge.utils.GeoJsonPointSerializer;
 import lombok.Getter;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.geo.GeoJsonMultiPolygon;
@@ -19,8 +22,10 @@ public class Partner {
 
     private String document;
 
+    @JsonSerialize(using = GeoJsonMultiPolygonSerializer.class)
     private GeoJsonMultiPolygon coverageArea;
 
+    @JsonSerialize(using = GeoJsonPointSerializer.class)
     private GeoJsonPoint address;
 
     public Partner(String tradingName, String ownerName, String document, GeoJsonMultiPolygon coverageArea, GeoJsonPoint address) {

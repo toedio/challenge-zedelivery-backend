@@ -6,6 +6,7 @@ import delivery.ze.challenge.exception.BadRequestException;
 import delivery.ze.challenge.exception.NotFoundException;
 import delivery.ze.challenge.service.PartnerService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.geo.Point;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.geo.GeoJsonPoint;
@@ -22,6 +23,7 @@ public class PartnerServiceImpl implements PartnerService {
     private MongoTemplate mongoTemplate;
 
     @Override
+    @Cacheable("partner")
     public Partner getById(String id) {
         return partnerRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException("Partner not found. Id: " + id));
