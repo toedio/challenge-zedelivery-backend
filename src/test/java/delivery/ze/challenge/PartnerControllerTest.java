@@ -6,7 +6,6 @@ import delivery.ze.challenge.dto.PartnerDTO;
 import delivery.ze.challenge.exception.ErrorDTO;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.geo.Point;
 import org.springframework.data.mongodb.core.geo.GeoJsonMultiPolygon;
 import org.springframework.data.mongodb.core.geo.GeoJsonPoint;
@@ -14,7 +13,6 @@ import org.springframework.data.mongodb.core.geo.GeoJsonPolygon;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
-import org.springframework.web.context.WebApplicationContext;
 
 import java.util.*;
 import java.util.stream.IntStream;
@@ -29,9 +27,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 public class PartnerControllerTest extends IntegrationTest{
 
     private MockMvc mockMvc;
-
-    @Autowired
-    private WebApplicationContext wac;
 
     @BeforeAll
     public void setup() {

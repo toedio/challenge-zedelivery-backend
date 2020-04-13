@@ -25,7 +25,7 @@ PartnerController class has validations' annotation like @NotNull @Min, @Max, @V
 Application has a converter service. It is used to convert DTO into an entity and vice versa and this service is used in the PartnerController. This way PartnerService know only domain and PartnerController know only DTO.
 
 ### Docker Compose
-The application use docker compose that automatically starts all necessary dependencies (redis and mongodb) and starts the web application on port 8080. I chose the docker compose because it is an easy tool to run the docker with multiple containers, platforms with multiple clouds and standardize the infrastructure.
+The application use docker compose that automatically starts all necessary dependencies (redis and mongodb) and starts the web application on port 8080. Docker compose run mongo seed too that are scripts to populate partners in mongodb and create indexes (unique for CNPJ and "2dsphere" to use $near operator). I chose the docker compose because it is an easy tool to run the docker with multiple containers, platforms with multiple clouds and standardize the infrastructure.
 
 ## Services
 API was documented using swagger.io and file swagger-doc.json is available on the project. The services are also described below.

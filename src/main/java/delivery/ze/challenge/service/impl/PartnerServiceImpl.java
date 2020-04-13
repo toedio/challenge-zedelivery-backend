@@ -5,22 +5,18 @@ import delivery.ze.challenge.domain.Partner;
 import delivery.ze.challenge.exception.BadRequestException;
 import delivery.ze.challenge.exception.NotFoundException;
 import delivery.ze.challenge.service.PartnerService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.geo.Point;
-import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.geo.GeoJsonPoint;
 import org.springframework.stereotype.Service;
 
 
 @Service
+@RequiredArgsConstructor
 public class PartnerServiceImpl implements PartnerService {
 
-    @Autowired
-    private PartnerRepository partnerRepository;
-
-    @Autowired
-    private MongoTemplate mongoTemplate;
+    private final PartnerRepository partnerRepository;
 
     @Override
     @Cacheable("partner")
