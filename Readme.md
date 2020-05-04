@@ -1,7 +1,5 @@
 # Backend Challenge
-This is my challenge, I'm Victor Silva and applicant to Software Engineer position.
-
-Contact: toedio6@gmail.com / 11 99656-6750
+Challenge link:https://github.com/ZXVentures/ze-code-challenges/blob/master/backend.md
 
 ## Technologies
 - Java 8
